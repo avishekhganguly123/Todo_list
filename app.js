@@ -12,8 +12,8 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://admin-avishekh:hello1234@cluster0.kslik.mongodb.net/todolistDB", {useNewUrlParser: true});
-
+//mongoose.connect("mongodb+srv://admin-avishekh:hello1234@cluster0.kslik.mongodb.net/todolistDB", {useNewUrlParser: true});
+mongoose.connect("mongodb+srv://admin-avishekh:hello1234@cluster0.kslik.mongodb.net/todolistDB?retryWrites=true&w=majority")
 const itemsSchema = {
   name: String
 };
@@ -103,9 +103,7 @@ app.post("/", function(req, res){
     })
   }
 
-  item.save();
-
-  res.redirect("/");
+  //res.redirect("/");
 });
 
 app.post("/delete", function(req,res){
@@ -134,6 +132,7 @@ app.get("/about", function(req, res){
 });
 
 let port = process.env.PORT;
+
 if (port == null || port == "") {
   port = 3000;
 }
